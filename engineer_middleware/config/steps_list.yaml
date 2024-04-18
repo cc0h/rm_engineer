@@ -1328,4 +1328,85 @@ steps_list:
         common:
           <<: *NORMALLY
 
+  NEW_SMALL:
+    - step: "GIMBAL_READY"
+      gimbal:
+        <<: *SMALL_ISLAND_POS
+    - step: "ORE_ROTATOR_READY"
+      ore_rotator:
+        target: *READY_POS
+    - step: "ORE_LIFTER_READY"
+      ore_lifter:
+        target: *BIN_UP_POS
+    - step: "arm ready"
+      arm:
+        joints: [ 0.520, 0.06, 0.207, -0.791, 0.024, 1.518, -0.772 ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+  NEW_SMALL0:
+    - step: "down"
+      arm:
+        joints: [ 0.370, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "up"
+      arm:
+        joints: [ 0.520, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "move"
+      arm:
+        joints: [ "KEEP", "KEEP", -0.283, "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "stone side"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", -1.499, "KEEP", 1.318, *JOINT7_MID_POSITION ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "stone up"
+      arm:
+        joints: [ "KEEP", "KEEP", 0.251, "KEEP", "KEEP", *JOINT6_UP_POSITION, "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store ready"
+      arm:
+        joints: [ 0.315, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", 1.434, "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "close gripper"
+      gripper:
+        <<: *CLOSE_GRIPPER
+  NEW_SMALL00:
+    - step: "arm home"
+      arm:
+        joints: [ "KEEP", "KEEP", *JOINT3_HOME_POS, *JOINT4_R_POSITION, *JOINT5_MID_POSITION, *JOINT6_UP_POSITION, *JOINT7_MID_POSITION ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "ore lifter down"
+      ore_lifter:
+        target: *BIN_DOWN_POS
 
