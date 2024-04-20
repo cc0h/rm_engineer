@@ -249,6 +249,47 @@ common:
     open: &EX_OPEN
           2.6
 
+#######TEST############
+  test:
+    ready1: &READY_1
+      0.475
+    ready2: &READY_2
+      0.025
+    m_ready3: &M_READY_3
+      0.037
+    l_ready3: &L_READY_3
+      0.308
+    r_ready3: &R_READY_3
+      -0.233
+    ready4: &READY_4
+      0.054
+    ready5: &READY_5
+      -3.128
+    ready6: &READY_6
+      -1.607
+    ready7: &READY_7
+      0.012
+
+    down1: &DOWN_1
+      0.310
+    up5: &UP_5
+      -0.001
+    back6: &BACK_6
+      -1.987
+    turn3: &TURN_3
+      0.257
+    turn4: &TURN_4
+      -1.497
+    store1: &STORE_1
+      0.249
+    store6: &STORE_6
+      -1.633
+    store7: &STORE_7
+      1.722
+    store5: &STORE_5
+      1.615
+
+#######TEST############
 steps_list:
   EXCHANGE_POS:
     - step: "gimbal look front"
@@ -1349,3 +1390,258 @@ steps_list:
     - step: "gimbal tall"
       gimbal_lifter:
         target: *TALLEST_POS
+
+  M_SMALL:
+    - step: "GIMBAL_READY"
+      gimbal:
+        <<: *SMALL_ISLAND_POS
+    - step: "ORE_ROTATOR_READY"
+      ore_rotator:
+        target: *READY_POS
+    - step: "ORE_LIFTER_READY"
+      ore_lifter:
+        target: *BIN_MID_POS
+    - step: "arm ready"
+      arm:
+        joints: [ *READY_1, *READY_2, *M_READY_3, *READY_4, *READY_5, *READY_6, *READY_7 ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "open gripper"
+      gripper:
+        <<: *OPEN_GRIPPER
+  M_SMALL0:
+    - step: "down"
+      arm:
+        joints: [ *DOWN_1, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "up"
+      arm:
+        joints: [ *READY_1, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "stone up"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", *UP_5, "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "joint6 back"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", *BACK_6, "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "turn"
+      arm:
+        joints: [ "KEEP", "KEEP", *TURN_3, *TURN_4, "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store ready"
+      arm:
+        joints: [ *STORE_1, "KEEP", "KEEP", "KEEP", "KEEP", *STORE_6, *STORE_7 ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", *STORE_5, "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+  M_SMALL00:
+    - step: "close gripper"
+      gripper:
+        <<: *CLOSE_GRIPPER
+    - step: "arm home"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", *JOINT4_R_POSITION, *JOINT5_MID_POSITION, *JOINT6_UP_POSITION, *JOINT7_MID_POSITION ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "ore lifter down"
+      ore_lifter:
+        target: *BIN_DOWN_POS
+
+  L_SMALL:
+    - step: "GIMBAL_READY"
+      gimbal:
+        <<: *SMALL_ISLAND_POS
+    - step: "ORE_ROTATOR_READY"
+      ore_rotator:
+        target: *READY_POS
+    - step: "ORE_LIFTER_READY"
+      ore_lifter:
+        target: *BIN_MID_POS
+    - step: "arm ready"
+      arm:
+        joints: [ *READY_1, *READY_2, *L_READY_3, *READY_4, *READY_5, *READY_6, *READY_7 ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "open gripper"
+      gripper:
+        <<: *OPEN_GRIPPER
+  L_SMALL0:
+    - step: "down"
+      arm:
+        joints: [ *DOWN_1, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "up"
+      arm:
+        joints: [ *READY_1, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "stone up"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", *UP_5, "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "joint6 back"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", *BACK_6, "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "turn"
+      arm:
+        joints: [ "KEEP", "KEEP", *TURN_3, *TURN_4, "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store ready"
+      arm:
+        joints: [ *STORE_1, "KEEP", "KEEP", "KEEP", "KEEP", *STORE_6, *STORE_7 ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", *STORE_5, "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+  L_SMALL00:
+    - step: "close gripper"
+      gripper:
+        <<: *CLOSE_GRIPPER
+    - step: "arm home"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", *JOINT4_R_POSITION, *JOINT5_MID_POSITION, *JOINT6_UP_POSITION, *JOINT7_MID_POSITION ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "ore lifter down"
+      ore_lifter:
+        target: *BIN_DOWN_POS
+
+  R_SMALL:
+    - step: "GIMBAL_READY"
+      gimbal:
+        <<: *SMALL_ISLAND_POS
+    - step: "ORE_ROTATOR_READY"
+      ore_rotator:
+        target: *READY_POS
+    - step: "ORE_LIFTER_READY"
+      ore_lifter:
+        target: *BIN_MID_POS
+    - step: "arm ready"
+      arm:
+        joints: [ *READY_1, *READY_2, *R_READY_3, *READY_4, *READY_5, *READY_6, *READY_7 ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "open gripper"
+      gripper:
+        <<: *OPEN_GRIPPER
+  R_SMALL0:
+    - step: "down"
+      arm:
+        joints: [ *DOWN_1, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "up"
+      arm:
+        joints: [ *READY_1, "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "stone up"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", *UP_5, "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "joint6 back"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", "KEEP", *BACK_6, "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "turn"
+      arm:
+        joints: [ "KEEP", "KEEP", *TURN_3, *TURN_4, "KEEP", "KEEP", "KEEP" ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store ready"
+      arm:
+        joints: [ *STORE_1, "KEEP", "KEEP", "KEEP", "KEEP", *STORE_6, *STORE_7 ]
+        common:
+          <<: *NORMALLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "store"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", "KEEP", *STORE_5, "KEEP", "KEEP" ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+  R_SMALL00:
+    - step: "close gripper"
+      gripper:
+        <<: *CLOSE_GRIPPER
+    - step: "arm home"
+      arm:
+        joints: [ "KEEP", "KEEP", "KEEP", *JOINT4_R_POSITION, *JOINT5_MID_POSITION, *JOINT6_UP_POSITION, *JOINT7_MID_POSITION ]
+        common:
+          <<: *SLOWLY
+        tolerance:
+          <<: *NORMAL_TOLERANCE
+    - step: "ore lifter down"
+      ore_lifter:
+        target: *BIN_DOWN_POS
