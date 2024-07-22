@@ -39,6 +39,7 @@
 
 #include "engineer_middleware/step_queue.h"
 #include "engineer_middleware/planning_scene.h"
+#include "trajectory_client.h"
 
 // ROS
 #include <ros/ros.h>
@@ -79,6 +80,7 @@ public:
 private:
   ros::NodeHandle nh_;
   actionlib::SimpleActionServer<rm_msgs::EngineerAction> as_;
+  TrajectoryClient trajectory_client_;
   moveit::planning_interface::MoveGroupInterface arm_group_;
   ChassisInterface chassis_interface_;
   ros::Publisher hand_pub_, end_effector_pub_, gimbal_pub_, gpio_pub_, reversal_pub_, planning_result_pub_,

@@ -43,6 +43,7 @@ Middleware::Middleware(ros::NodeHandle& nh)
   : nh_(nh)
   , as_(
         nh_, "move_steps", [this](auto&& PH1) { executeCB(std::forward<decltype(PH1)>(PH1)); }, false)
+  , trajectory_client_("/controllers/arm_trajectory_controller/follow_joint_trajectory", false)
   , arm_group_(moveit::planning_interface::MoveGroupInterface("engineer_arm"))
   , chassis_interface_(nh, tf_)
   , hand_pub_(nh.advertise<std_msgs::Float64>("/controllers/hand_controller/command", 10))

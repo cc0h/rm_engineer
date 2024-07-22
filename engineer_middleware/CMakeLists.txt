@@ -21,6 +21,7 @@ find_package(catkin REQUIRED
         moveit_core
         moveit_ros_planning_interface
         actionlib
+        control_msgs
         angles
         )
 
@@ -49,6 +50,7 @@ catkin_package(
         moveit_core
         moveit_ros_planning_interface
         actionlib
+        control_msgs
         angles
         DEPENDS
 )
@@ -70,7 +72,9 @@ include_directories(
 add_executable(${PROJECT_NAME}
         src/middleware.cpp
         src/engineer_middleware.cpp include/engineer_middleware/auto_exchange.h include/engineer_middleware/auto_exchange.h
-        include/engineer_middleware/moveit_exchange.h)
+        include/engineer_middleware/moveit_exchange.h
+        include/engineer_middleware/trajectory_client.h
+        include/engineer_middleware/trajectory_reader.h)
 
 add_dependencies(${PROJECT_NAME}
         ${catkin_EXPORTED_TARGETS}
