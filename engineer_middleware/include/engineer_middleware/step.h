@@ -34,6 +34,8 @@
 #pragma once
 
 #include "engineer_middleware/motion.h"
+#include "engineer_middleware/trajectory_client.h"
+#include "engineer_middleware/trajectory_reader.h"
 #include "engineer_middleware/planning_scene.h"
 #include <string>
 #include <unordered_map>
@@ -48,12 +50,13 @@ class Step
 public:
   Step(const XmlRpc::XmlRpcValue& step, const XmlRpc::XmlRpcValue& scenes, tf2_ros::Buffer& tf,
        moveit::planning_interface::MoveGroupInterface& arm_group, ChassisInterface& chassis_interface,
-       ros::Publisher& hand_pub, ros::Publisher& end_effector_pub, ros::Publisher& gimbal_pub, ros::Publisher& gpio_pub,
-       ros::Publisher& reversal_pub, ros::Publisher& stone_num_pub, ros::Publisher& planning_result_pub,
-       ros::Publisher& point_cloud_pub, ros::Publisher& ore_rotate_pub, ros::Publisher& ore_lift_pub,
-       ros::Publisher& gimbal_lift_pub, ros::Publisher& extend_arm_f_pub, ros::Publisher& extend_arm_b_pub,
-       ros::Publisher& silver_lifter_pub, ros::Publisher& silver_pusher_pub, ros::Publisher& silver_rotator_pub,
-       ros::Publisher& gold_pusher_pub, ros::Publisher& gold_lifter_pub, ros::Publisher& middle_pitch_pub)
+       TrajectoryClient& trajectory_client, ros::Publisher& hand_pub, ros::Publisher& end_effector_pub,
+       ros::Publisher& gimbal_pub, ros::Publisher& gpio_pub, ros::Publisher& reversal_pub,
+       ros::Publisher& stone_num_pub, ros::Publisher& planning_result_pub, ros::Publisher& point_cloud_pub,
+       ros::Publisher& ore_rotate_pub, ros::Publisher& ore_lift_pub, ros::Publisher& gimbal_lift_pub,
+       ros::Publisher& extend_arm_f_pub, ros::Publisher& extend_arm_b_pub, ros::Publisher& silver_lifter_pub,
+       ros::Publisher& silver_pusher_pub, ros::Publisher& silver_rotator_pub, ros::Publisher& gold_pusher_pub,
+       ros::Publisher& gold_lifter_pub, ros::Publisher& middle_pitch_pub)
     : planning_result_pub_(planning_result_pub), point_cloud_pub_(point_cloud_pub), arm_group_(arm_group)
   {
     ROS_ASSERT(step.hasMember("step"));
@@ -253,6 +256,7 @@ private:
   ros::Publisher point_cloud_pub_;
   MoveitMotionBase* arm_motion_{};
   HandMotion* hand_motion_{};
+  TrajectoryClient* trajectory_client_{};
   JointPositionMotion* end_effector_motion_{};
   JointPointMotion *ore_rotate_motion_{}, *ore_lift_motion_{}, *gimbal_lift_motion_{};
   JointPointMotion *silver_lifter_motion_{}, *silver_pusher_motion_{}, *silver_rotator_motion_{},
